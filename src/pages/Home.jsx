@@ -1,6 +1,22 @@
 import React from 'react';
+import FilterBy from '../components/FilterBy';
+import DoctorCard from '../components/DoctorCard';
+import doctorImg from '../assets/images/doctors/doctor.jpg';
 
 const Home = () => {
+  const handleFilterChange = (filters) => {
+    console.log('Filters changed:', filters);
+    // Update your data based on these filters
+  };
+
+  const doctor = {
+    name: 'Dr. John Smith',
+    specialty: 'Cardiology',
+    availability: 'Available Today',
+    location: 'Downtown Medical Center',
+    imageUrl: doctorImg,
+  };
+
   return (
     <div className="py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,6 +54,13 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        <section className="mt-10">
+          <FilterBy onFilterChange={handleFilterChange} />
+        </section>
+        <section className="mt-10">
+          <DoctorCard doctor={doctor} />
+        </section>
       </div>
     </div>
   );
