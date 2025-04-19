@@ -22,7 +22,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
           onClose();
           setBookingStatus(null);
           setSelectedSlot('');
-        }, 2000);
+        }, 1000);
       } catch (error) {
         setBookingStatus('error');
         setErrorMessage(
