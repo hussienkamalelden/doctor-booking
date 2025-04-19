@@ -1,8 +1,17 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './layouts/Navbar';
+import Home from './pages/Home';
+
 function App() {
   return (
-    <>
-      <h1 className="bg-red-300"> HI</h1>
-    </>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
