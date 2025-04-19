@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dropdown from './Dropdown';
 
 const FilterBy = ({ onFilterChange }) => {
@@ -7,19 +7,41 @@ const FilterBy = ({ onFilterChange }) => {
     availability: null,
   });
 
-  const specialties = [
-    { value: 'cardiology', label: 'Cardiology' },
-    { value: 'dermatology', label: 'Dermatology' },
-    { value: 'pediatrics', label: 'Pediatrics' },
-    { value: 'orthopedics', label: 'Orthopedics' },
-    { value: 'neurology', label: 'Neurology' },
-  ];
+  const [specialties, setSpecialties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSpecialties = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/specialties');
+        const data = await response.json();
+        setSpecialties(
+          data.map((specialty) => ({
+            value: specialty.id,
+            label: specialty.name,
+          }))
+        );
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching specialties:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchSpecialties();
+  }, []);
 
   const availabilities = [
-    { value: 'today', label: 'Today' },
-    { value: 'tomorrow', label: 'Tomorrow' },
-    { value: 'this_week', label: 'This Week' },
-    { value: 'next_week', label: 'Next Week' },
+    { value: '14:00', label: '2:00 PM' },
+    { value: '15:00', label: '3:00 PM' },
+    { value: '16:00', label: '4:00 PM' },
+    { value: '17:00', label: '5:00 PM' },
+    { value: '18:00', label: '6:00 PM' },
+    { value: '19:00', label: '7:00 PM' },
+    { value: '20:00', label: '8:00 PM' },
+    { value: '21:00', label: '9:00 PM' },
+    { value: '22:00', label: '10:00 PM' },
+    { value: '23:00', label: '11:00 PM' },
   ];
 
   const handleFilterChange = (type, value) => {
@@ -43,8 +65,9 @@ const FilterBy = ({ onFilterChange }) => {
             options={specialties}
             value={filters.specialty}
             onChange={(value) => handleFilterChange('specialty', value)}
-            placeholder="Select Specialty"
+            placeholder={loading ? 'Loading...' : 'Select Specialty'}
             className="w-full"
+            disabled={loading}
           />
         </div>
         <div className="flex-1">
@@ -55,7 +78,7 @@ const FilterBy = ({ onFilterChange }) => {
             options={availabilities}
             value={filters.availability}
             onChange={(value) => handleFilterChange('availability', value)}
-            placeholder="Select Availability"
+            placeholder="Select Time"
             className="w-full"
           />
         </div>

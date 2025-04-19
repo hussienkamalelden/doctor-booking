@@ -1,0 +1,136 @@
+{
+  "doctors": [
+    {
+      "id": "d1",
+      "name": "Dr. Sarah Johnson",
+      "image": "../assets/images/doctors/doctor.jpg",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Downtown Medical Center",
+      "slots": [
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00"
+      ]
+    },
+    {
+      "id": "d2",
+      "name": "Dr. Michael Chen",
+      "image": "../assets/images/doctors/doctor.jpg",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Westside Clinic",
+      "slots": [
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00"
+      ]
+    },
+    {
+      "id": "d3",
+      "name": "Dr. Emily Rodriguez",
+      "image": "../assets/images/doctors/doctor.jpg",
+      "specialty": {
+        "id": "s3",
+        "name": "Pediatrics"
+      },
+      "location": "Children's Hospital",
+      "slots": [
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00"
+      ]
+    },
+    {
+      "id": "d4",
+      "name": "Dr. James Wilson",
+      "image": "../assets/images/doctors/doctor.jpg",
+      "specialty": {
+        "id": "s4",
+        "name": "Orthopedics"
+      },
+      "location": "Sports Medicine Center",
+      "slots": [
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00"
+      ]
+    }
+  ],
+  "appointments": [
+    {
+      "id": "a1",
+      "name": "John Smith",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Downtown Medical Center",
+      "slot": "14:00"
+    },
+    {
+      "id": "a2",
+      "name": "Jane Doe",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Westside Clinic",
+      "slot": "15:00"
+    }
+  ],
+  "specialties": [
+    {
+      "id": "s1",
+      "name": "Cardiology"
+    },
+    {
+      "id": "s2",
+      "name": "Dermatology"
+    },
+    {
+      "id": "s3",
+      "name": "Pediatrics"
+    },
+    {
+      "id": "s4",
+      "name": "Orthopedics"
+    },
+    {
+      "id": "s5",
+      "name": "Neurology"
+    }
+  ]
+}

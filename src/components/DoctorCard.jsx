@@ -6,7 +6,7 @@ const DoctorCard = ({ doctor }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Doctor Image */}
-      <div className="h-64 w-full overflow-hidden">
+      <div className="h-56 w-full overflow-hidden">
         <img
           src={imageUrl}
           alt={`Dr. ${name}`}
