@@ -4,6 +4,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
   const [selectedSlot, setSelectedSlot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStatus, setBookingStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
@@ -11,6 +12,8 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
     e.preventDefault();
     if (selectedSlot) {
       setIsSubmitting(true);
+      setErrorMessage(''); // Clear any previous error messages
+      setBookingStatus(null);
       try {
         await onBookAppointment(doctor, selectedSlot);
         setBookingStatus('success');
@@ -22,6 +25,9 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
         }, 2000);
       } catch (error) {
         setBookingStatus('error');
+        setErrorMessage(
+          error.message || 'Failed to book appointment. Please try again.'
+        );
       } finally {
         setIsSubmitting(false);
       }
@@ -84,7 +90,11 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
             <select
               id="timeSlot"
               value={selectedSlot}
-              onChange={(e) => setSelectedSlot(e.target.value)}
+              onChange={(e) => {
+                setSelectedSlot(e.target.value);
+                setErrorMessage(''); // Clear error when user changes selection
+                setBookingStatus(null);
+              }}
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
               disabled={isSubmitting}
@@ -106,7 +116,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
 
           {bookingStatus === 'error' && (
             <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
-              Failed to book appointment. Please try again.
+              {errorMessage}
             </div>
           )}
 

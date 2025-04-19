@@ -10,7 +10,6 @@
       },
       "location": "Downtown Medical Center",
       "slots": [
-        "2:00 PM",
         "3:00 PM",
         "4:00 PM",
         "5:00 PM",
@@ -531,24 +530,14 @@
   ],
   "appointments": [
     {
-      "id": "a1",
-      "name": "John Smith",
+      "id": "a1745075051581",
+      "name": "Dr. Sarah Johnson",
       "specialty": {
         "id": "s1",
         "name": "Cardiology"
       },
       "location": "Downtown Medical Center",
-      "slot": "14:00"
-    },
-    {
-      "id": "a2",
-      "name": "Jane Doe",
-      "specialty": {
-        "id": "s2",
-        "name": "Dermatology"
-      },
-      "location": "Westside Clinic",
-      "slot": "15:00"
+      "slot": "2:00 PM"
     }
   ],
   "specialties": [

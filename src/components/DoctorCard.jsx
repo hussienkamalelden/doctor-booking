@@ -10,7 +10,23 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
 
   const handleBookAppointment = async (doctor, selectedSlot) => {
     try {
-      // 1. Create the appointment
+      // 1. Check for existing appointments at the same time
+      const appointmentsResponse = await fetch(
+        'http://localhost:3001/appointments'
+      );
+      const appointments = await appointmentsResponse.json();
+
+      const hasExistingAppointment = appointments.some(
+        (appointment) => appointment.slot === selectedSlot
+      );
+
+      if (hasExistingAppointment) {
+        throw new Error(
+          'You already have an appointment scheduled at this time. Please choose a different time slot.'
+        );
+      }
+
+      // 2. Create the appointment
       const appointmentData = {
         id: `a${Date.now()}`, // Generate a unique ID
         name: doctor.name,
@@ -34,7 +50,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
         throw new Error('Failed to book appointment');
       }
 
-      // 2. Update the doctor's slots
+      // 3. Update the doctor's slots
       const updatedSlots = doctor.slots.filter((slot) => slot !== selectedSlot);
       const doctorUpdateResponse = await fetch(
         `http://localhost:3001/doctors/${doctor.id}`,
@@ -53,7 +69,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
         throw new Error('Failed to update doctor slots');
       }
 
-      // 3. Refresh the doctors list
+      // 4. Refresh the doctors list
       await onDoctorUpdate();
 
       // Show success message or handle the response
