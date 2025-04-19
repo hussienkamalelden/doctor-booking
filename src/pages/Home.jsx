@@ -10,20 +10,20 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const doctorsPerPage = 6;
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/doctors');
-        const data = await response.json();
-        setDoctors(data);
-        setFilteredDoctors(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching doctors:', error);
-        setLoading(false);
-      }
-    };
+  const fetchDoctors = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/doctors');
+      const data = await response.json();
+      setDoctors(data);
+      setFilteredDoctors(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchDoctors();
   }, []);
 
@@ -90,7 +90,11 @@ const Home = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentDoctors.map((doctor) => (
-                  <DoctorCard key={doctor.id} doctor={doctor} />
+                  <DoctorCard
+                    key={doctor.id}
+                    doctor={doctor}
+                    onDoctorUpdate={fetchDoctors}
+                  />
                 ))}
               </div>
 
