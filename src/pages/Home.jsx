@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterBy from '../components/FilterBy';
 import DoctorCard from '../components/DoctorCard';
-import doctorImg from '../assets/images/doctors/doctor.jpg';
 
 const Home = () => {
-  const handleFilterChange = (filters) => {
-    console.log('Filters changed:', filters);
-    // Update your data based on these filters
-  };
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
 
-  const doctor = {
-    name: 'Dr. John Smith',
-    specialty: 'Cardiology',
-    availability: 'Available Today',
-    location: 'Downtown Medical Center',
-    imageUrl: doctorImg,
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/doctors');
+        const data = await response.json();
+        setDoctors(data);
+        setFilteredDoctors(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching doctors:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
+  const handleFilterChange = (filters) => {
+    let filtered = [...doctors];
+
+    if (filters.specialty) {
+      filtered = filtered.filter(
+        (doctor) => doctor.specialty.id === filters.specialty.value
+      );
+    }
+
+    if (filters.availability) {
+      filtered = filtered.filter((doctor) =>
+        doctor.slots.includes(filters.availability.value)
+      );
+    }
+
+    setFilteredDoctors(filtered);
   };
 
   return (
@@ -58,8 +83,25 @@ const Home = () => {
         <section className="mt-10">
           <FilterBy onFilterChange={handleFilterChange} />
         </section>
+
         <section className="mt-10">
-          <DoctorCard doctor={doctor} />
+          {loading ? (
+            <div className="text-center">
+              <p className="text-gray-600">Loading doctors...</p>
+            </div>
+          ) : filteredDoctors.length === 0 ? (
+            <div className="text-center">
+              <p className="text-gray-600">
+                No doctors found matching your criteria
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredDoctors.map((doctor) => (
+                <DoctorCard key={doctor.id} doctor={doctor} />
+              ))}
+            </div>
+          )}
         </section>
       </div>
     </div>

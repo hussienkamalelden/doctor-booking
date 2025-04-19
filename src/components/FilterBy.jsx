@@ -32,16 +32,16 @@ const FilterBy = ({ onFilterChange }) => {
   }, []);
 
   const availabilities = [
-    { value: '14:00', label: '2:00 PM' },
-    { value: '15:00', label: '3:00 PM' },
-    { value: '16:00', label: '4:00 PM' },
-    { value: '17:00', label: '5:00 PM' },
-    { value: '18:00', label: '6:00 PM' },
-    { value: '19:00', label: '7:00 PM' },
-    { value: '20:00', label: '8:00 PM' },
-    { value: '21:00', label: '9:00 PM' },
-    { value: '22:00', label: '10:00 PM' },
-    { value: '23:00', label: '11:00 PM' },
+    { value: '2:00 PM', label: '2:00 PM' },
+    { value: '3:00 PM', label: '3:00 PM' },
+    { value: '4:00 PM', label: '4:00 PM' },
+    { value: '5:00 PM', label: '5:00 PM' },
+    { value: '6:00 PM', label: '6:00 PM' },
+    { value: '7:00 PM', label: '7:00 PM' },
+    { value: '8:00 PM', label: '8:00 PM' },
+    { value: '9:00 PM', label: '9:00 PM' },
+    { value: '10:00 PM', label: '10:00 PM' },
+    { value: '11:00 PM', label: '11:00 PM' },
   ];
 
   const handleFilterChange = (type, value) => {

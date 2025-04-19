@@ -1,14 +1,17 @@
 import React from 'react';
 
 const DoctorCard = ({ doctor }) => {
-  const { name, specialty, availability, location, imageUrl } = doctor;
+  const { name, specialty, location, image, slots } = doctor;
+
+  // Get the first available slot as the next availability
+  const nextAvailability = slots.length > 0 ? slots[0] : 'No slots available';
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Doctor Image */}
       <div className="h-56 w-full overflow-hidden">
         <img
-          src={imageUrl}
+          src={image}
           alt={`Dr. ${name}`}
           className="w-full h-full object-cover object-top"
         />
@@ -33,7 +36,7 @@ const DoctorCard = ({ doctor }) => {
                 d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
               />
             </svg>
-            <span>{specialty}</span>
+            <span>{specialty.name}</span>
           </div>
 
           <div className="flex items-center text-gray-600">
@@ -50,7 +53,7 @@ const DoctorCard = ({ doctor }) => {
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <span>{availability}</span>
+            <span>Next available: {nextAvailability}</span>
           </div>
 
           <div className="flex items-center text-gray-600">
