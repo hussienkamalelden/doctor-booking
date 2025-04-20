@@ -1,0 +1,555 @@
+{
+  "doctors": [
+    {
+      "id": "d1",
+      "name": "Dr. Sarah Johnson",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Downtown Medical Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d2",
+      "name": "Dr. Michael Chen",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Westside Clinic",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d3",
+      "name": "Dr. Emily Rodriguez",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s3",
+        "name": "Pediatrics"
+      },
+      "location": "Children's Hospital",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d4",
+      "name": "Dr. James Wilson",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s4",
+        "name": "Orthopedics"
+      },
+      "location": "Sports Medicine Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d5",
+      "name": "Dr. Lisa Anderson",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s5",
+        "name": "Neurology"
+      },
+      "location": "Neurological Institute",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d6",
+      "name": "Dr. Robert Taylor",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Heart Care Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d7",
+      "name": "Dr. Maria Garcia",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Skin Care Clinic",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d8",
+      "name": "Dr. David Kim",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s3",
+        "name": "Pediatrics"
+      },
+      "location": "Kids Health Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d9",
+      "name": "Dr. Jennifer Lee",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s4",
+        "name": "Orthopedics"
+      },
+      "location": "Bone & Joint Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d10",
+      "name": "Dr. Thomas Brown",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s5",
+        "name": "Neurology"
+      },
+      "location": "Brain Health Institute",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d11",
+      "name": "Dr. Patricia White",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Cardiac Care Unit",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d12",
+      "name": "Dr. William Martinez",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Dermatology Associates",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d13",
+      "name": "Dr. Susan Clark",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s3",
+        "name": "Pediatrics"
+      },
+      "location": "Pediatric Wellness Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d14",
+      "name": "Dr. Richard Davis",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s4",
+        "name": "Orthopedics"
+      },
+      "location": "Orthopedic Specialists",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d15",
+      "name": "Dr. Elizabeth Moore",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s5",
+        "name": "Neurology"
+      },
+      "location": "Neuro Care Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d16",
+      "name": "Dr. Christopher Allen",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Heart Health Institute",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d17",
+      "name": "Dr. Michelle Young",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Skin Wellness Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d18",
+      "name": "Dr. Kevin Scott",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s3",
+        "name": "Pediatrics"
+      },
+      "location": "Children's Medical Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d19",
+      "name": "Dr. Rachel Green",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s4",
+        "name": "Orthopedics"
+      },
+      "location": "Joint Care Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d20",
+      "name": "Dr. Daniel King",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s5",
+        "name": "Neurology"
+      },
+      "location": "Neuro Health Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d21",
+      "name": "Dr. Amanda Turner",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Cardiac Wellness Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d22",
+      "name": "Dr. Brian Miller",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s2",
+        "name": "Dermatology"
+      },
+      "location": "Dermatology Wellness",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d23",
+      "name": "Dr. Jessica Hall",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s3",
+        "name": "Pediatrics"
+      },
+      "location": "Pediatric Care Center",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    },
+    {
+      "id": "d24",
+      "name": "Dr. Matthew Wright",
+      "image": "public/assets/images/doctors/doctor.jpeg",
+      "specialty": {
+        "id": "s4",
+        "name": "Orthopedics"
+      },
+      "location": "Orthopedic Wellness",
+      "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+        "9:00 PM",
+        "10:00 PM",
+        "11:00 PM"
+      ]
+    }
+  ],
+  "appointments": [],
+  "specialties": [
+    {
+      "id": "s1",
+      "name": "Cardiology"
+    },
+    {
+      "id": "s2",
+      "name": "Dermatology"
+    },
+    {
+      "id": "s3",
+      "name": "Pediatrics"
+    },
+    {
+      "id": "s4",
+      "name": "Orthopedics"
+    },
+    {
+      "id": "s5",
+      "name": "Neurology"
+    }
+  ]
+}
