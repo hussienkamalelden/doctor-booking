@@ -90,10 +90,10 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
             alt={`Dr. ${name}`}
             className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent">
             <div className="absolute bottom-0 left-0 right-0 p-4">
               <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
-              <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              <span className="inline-block bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {specialty.name}
               </span>
             </div>
@@ -105,7 +105,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
           <div className="space-y-3">
             <div className="flex items-center text-gray-600">
               <svg
-                className="w-5 h-5 mr-2 text-blue-500"
+                className="w-5 h-5 mr-2 text-emerald-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -124,7 +124,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
 
             <div className="flex items-center text-gray-600">
               <svg
-                className="w-5 h-5 mr-2 text-blue-500"
+                className="w-5 h-5 mr-2 text-emerald-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -147,7 +147,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
           </div>
 
           <button
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
+            className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
             onClick={() => setIsModalOpen(true)}
           >
             Book Appointment
