@@ -10,7 +10,11 @@
       },
       "location": "Downtown Medical Center",
       "slots": [
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
         "5:00 PM",
+        "6:00 PM",
         "7:00 PM",
         "8:00 PM",
         "9:00 PM",
@@ -28,8 +32,10 @@
       },
       "location": "Westside Clinic",
       "slots": [
+        "2:00 PM",
         "3:00 PM",
         "4:00 PM",
+        "5:00 PM",
         "6:00 PM",
         "7:00 PM",
         "8:00 PM",
@@ -523,58 +529,7 @@
       ]
     }
   ],
-  "appointments": [
-    {
-      "id": "a1745120627997",
-      "name": "Dr. Sarah Johnson",
-      "specialty": {
-        "id": "s1",
-        "name": "Cardiology"
-      },
-      "location": "Downtown Medical Center",
-      "slot": "3:00 PM"
-    },
-    {
-      "id": "a1745121567949",
-      "name": "Dr. Sarah Johnson",
-      "specialty": {
-        "id": "s1",
-        "name": "Cardiology"
-      },
-      "location": "Downtown Medical Center",
-      "slot": "4:00 PM"
-    },
-    {
-      "id": "a1745121587007",
-      "name": "Dr. Michael Chen",
-      "specialty": {
-        "id": "s2",
-        "name": "Dermatology"
-      },
-      "location": "Westside Clinic",
-      "slot": "5:00 PM"
-    },
-    {
-      "id": "a1745121688520",
-      "name": "Dr. Sarah Johnson",
-      "specialty": {
-        "id": "s1",
-        "name": "Cardiology"
-      },
-      "location": "Downtown Medical Center",
-      "slot": "6:00 PM"
-    },
-    {
-      "id": "a1745121703452",
-      "name": "Dr. Michael Chen",
-      "specialty": {
-        "id": "s2",
-        "name": "Dermatology"
-      },
-      "location": "Westside Clinic",
-      "slot": "2:00 PM"
-    }
-  ],
+  "appointments": [],
   "specialties": [
     {
       "id": "s1",
