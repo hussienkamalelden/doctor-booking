@@ -3,7 +3,7 @@
     {
       "id": "d1",
       "name": "Dr. Sarah Johnson",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s1",
         "name": "Cardiology"
@@ -25,7 +25,7 @@
     {
       "id": "d2",
       "name": "Dr. Michael Chen",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s2",
         "name": "Dermatology"
@@ -47,7 +47,7 @@
     {
       "id": "d3",
       "name": "Dr. Emily Rodriguez",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s3",
         "name": "Pediatrics"
@@ -69,7 +69,7 @@
     {
       "id": "d4",
       "name": "Dr. James Wilson",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s4",
         "name": "Orthopedics"
@@ -91,7 +91,7 @@
     {
       "id": "d5",
       "name": "Dr. Lisa Anderson",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s5",
         "name": "Neurology"
@@ -113,7 +113,7 @@
     {
       "id": "d6",
       "name": "Dr. Robert Taylor",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s1",
         "name": "Cardiology"
@@ -135,7 +135,7 @@
     {
       "id": "d7",
       "name": "Dr. Maria Garcia",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s2",
         "name": "Dermatology"
@@ -157,7 +157,7 @@
     {
       "id": "d8",
       "name": "Dr. David Kim",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s3",
         "name": "Pediatrics"
@@ -179,7 +179,7 @@
     {
       "id": "d9",
       "name": "Dr. Jennifer Lee",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s4",
         "name": "Orthopedics"
@@ -201,7 +201,7 @@
     {
       "id": "d10",
       "name": "Dr. Thomas Brown",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s5",
         "name": "Neurology"
@@ -223,7 +223,7 @@
     {
       "id": "d11",
       "name": "Dr. Patricia White",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s1",
         "name": "Cardiology"
@@ -245,7 +245,7 @@
     {
       "id": "d12",
       "name": "Dr. William Martinez",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s2",
         "name": "Dermatology"
@@ -267,7 +267,7 @@
     {
       "id": "d13",
       "name": "Dr. Susan Clark",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s3",
         "name": "Pediatrics"
@@ -289,7 +289,7 @@
     {
       "id": "d14",
       "name": "Dr. Richard Davis",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s4",
         "name": "Orthopedics"
@@ -311,7 +311,7 @@
     {
       "id": "d15",
       "name": "Dr. Elizabeth Moore",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s5",
         "name": "Neurology"
@@ -333,7 +333,7 @@
     {
       "id": "d16",
       "name": "Dr. Christopher Allen",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s1",
         "name": "Cardiology"
@@ -355,7 +355,7 @@
     {
       "id": "d17",
       "name": "Dr. Michelle Young",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s2",
         "name": "Dermatology"
@@ -377,7 +377,7 @@
     {
       "id": "d18",
       "name": "Dr. Kevin Scott",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s3",
         "name": "Pediatrics"
@@ -399,7 +399,7 @@
     {
       "id": "d19",
       "name": "Dr. Rachel Green",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s4",
         "name": "Orthopedics"
@@ -421,7 +421,7 @@
     {
       "id": "d20",
       "name": "Dr. Daniel King",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s5",
         "name": "Neurology"
@@ -443,7 +443,7 @@
     {
       "id": "d21",
       "name": "Dr. Amanda Turner",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s1",
         "name": "Cardiology"
@@ -465,7 +465,7 @@
     {
       "id": "d22",
       "name": "Dr. Brian Miller",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s2",
         "name": "Dermatology"
@@ -487,7 +487,7 @@
     {
       "id": "d23",
       "name": "Dr. Jessica Hall",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s3",
         "name": "Pediatrics"
@@ -509,7 +509,7 @@
     {
       "id": "d24",
       "name": "Dr. Matthew Wright",
-      "image": "https://images.pexels.com/photos/8376304/pexels-photo-8376304.jpeg",
+      "image": "public/assets/images/doctors/doctor.jpeg",
       "specialty": {
         "id": "s4",
         "name": "Orthopedics"
