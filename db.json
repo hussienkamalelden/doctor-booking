@@ -10,8 +10,6 @@
       },
       "location": "Downtown Medical Center",
       "slots": [
-        "2:00 PM",
-        "3:00 PM",
         "4:00 PM",
         "5:00 PM",
         "6:00 PM",
@@ -529,7 +527,18 @@
       ]
     }
   ],
-  "appointments": [],
+  "appointments": [
+    {
+      "id": "a1745120627997",
+      "name": "Dr. Sarah Johnson",
+      "specialty": {
+        "id": "s1",
+        "name": "Cardiology"
+      },
+      "location": "Downtown Medical Center",
+      "slot": "3:00 PM"
+    }
+  ],
   "specialties": [
     {
       "id": "s1",

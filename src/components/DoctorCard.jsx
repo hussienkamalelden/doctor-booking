@@ -83,40 +83,26 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
   return (
     <>
       <div className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-        {/* Doctor Image */}
-        <div className="relative h-64 w-full overflow-hidden">
+        {/* Doctor Image with Title Overlay */}
+        <div className="relative h-48 w-full overflow-hidden">
           <img
             src={image}
             alt={`Dr. ${name}`}
             className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 p-4">
+              <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
+              <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                {specialty.name}
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Doctor Info */}
         <div className="p-6 space-y-4">
-          <h3 className="text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
-            {name}
-          </h3>
-
           <div className="space-y-3">
-            <div className="flex items-center text-gray-600">
-              <svg
-                className="w-5 h-5 mr-2 text-blue-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                />
-              </svg>
-              <span className="font-medium">{specialty.name}</span>
-            </div>
-
             <div className="flex items-center text-gray-600">
               <svg
                 className="w-5 h-5 mr-2 text-blue-500"
