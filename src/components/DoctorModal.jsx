@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
   const [selectedSlot, setSelectedSlot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStatus, setBookingStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Trigger animation when modal opens
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -35,17 +45,22 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full overflow-hidden">
+      <div
+        className={`bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden transform transition-all duration-300 ${
+          isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}
+      >
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-6">
-          <div className="flex justify-between items-start">
+        <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNGM0LjQxOCAwIDgtMy41ODIgOC04cy0zLjU4Mi04LTgtOC04IDMuNTgyLTggOCAzLjU4MiA4IDggOHoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+          <div className="flex justify-between items-start relative z-10">
             <div>
               <h2 className="text-2xl font-bold text-white">{doctor.name}</h2>
               <p className="text-emerald-100 mt-1">{doctor.specialty.name}</p>
             </div>
             <button
               onClick={onClose}
-              className="text-white/80 hover:text-white transition-colors duration-200"
+              className="text-white/80 hover:text-white transition-colors duration-200 hover:scale-110 transform"
             >
               <svg
                 className="w-6 h-6"
@@ -67,21 +82,22 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
         {/* Content */}
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="relative h-64 rounded-xl overflow-hidden">
+            <div className="relative h-64 rounded-xl overflow-hidden group">
               <img
                 src={doctor.image}
                 alt={doctor.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="space-y-6">
-              <div className="bg-gray-50 p-4 rounded-xl">
+              <div className="bg-gray-50 p-4 rounded-xl hover:bg-gray-100 transition-colors duration-200">
                 <h3 className="text-sm font-semibold text-gray-500 mb-1">
                   Location
                 </h3>
                 <p className="text-gray-800">{doctor.location}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-xl">
+              <div className="bg-gray-50 p-4 rounded-xl hover:bg-gray-100 transition-colors duration-200">
                 <h3 className="text-sm font-semibold text-gray-500 mb-1">
                   Next Available
                 </h3>
@@ -100,29 +116,46 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
               >
                 Select Available Time Slot
               </label>
-              <select
-                id="timeSlot"
-                value={selectedSlot}
-                onChange={(e) => {
-                  setSelectedSlot(e.target.value);
-                  setErrorMessage('');
-                  setBookingStatus(null);
-                }}
-                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
-                required
-                disabled={isSubmitting}
-              >
-                <option value="">Select a time slot</option>
-                {doctor.slots.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  id="timeSlot"
+                  value={selectedSlot}
+                  onChange={(e) => {
+                    setSelectedSlot(e.target.value);
+                    setErrorMessage('');
+                    setBookingStatus(null);
+                  }}
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 appearance-none bg-white"
+                  required
+                  disabled={isSubmitting}
+                >
+                  <option value="">Select a time slot</option>
+                  {doctor.slots.map((slot) => (
+                    <option key={slot} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             {bookingStatus === 'success' && (
-              <div className="mb-4 p-4 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-200">
+              <div className="mb-4 p-4 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-200 animate-fade-in">
                 <div className="flex items-center">
                   <svg
                     className="w-5 h-5 mr-2"
@@ -143,7 +176,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
             )}
 
             {bookingStatus === 'error' && (
-              <div className="mb-4 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200">
+              <div className="mb-4 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200 animate-fade-in">
                 <div className="flex items-center">
                   <svg
                     className="w-5 h-5 mr-2"
@@ -167,7 +200,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
               <button
                 type="submit"
                 disabled={!selectedSlot || isSubmitting}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+                className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 ${
                   selectedSlot && !isSubmitting
                     ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md hover:shadow-lg'
                     : 'bg-gray-100 text-gray-400 cursor-not-allowed'
