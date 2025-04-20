@@ -55,7 +55,7 @@ const FilterBy = ({ onFilterChange }) => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-semibold text-gray-800">Filter by:</h2>
+      <h2 className="text-2xl font-bold text-emerald-600">Filter by:</h2>
       <div className="flex flex-col md:flex-row gap-4 p-4 bg-white rounded-lg shadow-sm">
         <div className="flex-1">
           <label className="block text-sm font-medium text-gray-700 mb-1">
