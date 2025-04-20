@@ -4,21 +4,39 @@ const AppointmentCard = ({ appointment }) => {
   const { name, specialty, location, slot } = appointment;
 
   return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 overflow-hidden">
+    <div
+      className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 overflow-hidden"
+      role="article"
+      aria-labelledby={`appointment-title-${appointment.id}`}
+      aria-describedby={`appointment-details-${appointment.id}`}
+    >
       <div className="p-6">
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-1">{name}</h3>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-50 text-emerald-700">
+            <h3
+              id={`appointment-title-${appointment.id}`}
+              className="text-xl font-semibold text-gray-800 mb-1"
+            >
+              {name}
+            </h3>
+            <span
+              id={`appointment-details-${appointment.id}`}
+              className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-50 text-emerald-700"
+            >
               {specialty.name}
             </span>
           </div>
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-200">
+          <div
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-200"
+            role="img"
+            aria-label="Appointment date icon"
+          >
             <svg
               className="w-5 h-5 text-emerald-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -31,13 +49,22 @@ const AppointmentCard = ({ appointment }) => {
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center p-3 bg-gray-50 rounded-xl group-hover:bg-emerald-50 transition-colors duration-200">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white mr-3">
+          <div
+            className="flex items-center p-3 bg-gray-50 rounded-xl group-hover:bg-emerald-50 transition-colors duration-200"
+            role="status"
+            aria-label="Appointment location"
+          >
+            <div
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-white mr-3"
+              role="img"
+              aria-label="Location icon"
+            >
               <svg
                 className="w-4 h-4 text-emerald-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -56,13 +83,22 @@ const AppointmentCard = ({ appointment }) => {
             <span className="text-gray-700 font-medium">{location}</span>
           </div>
 
-          <div className="flex items-center p-3 bg-gray-50 rounded-xl group-hover:bg-emerald-50 transition-colors duration-200">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white mr-3">
+          <div
+            className="flex items-center p-3 bg-gray-50 rounded-xl group-hover:bg-emerald-50 transition-colors duration-200"
+            role="status"
+            aria-label="Appointment time"
+          >
+            <div
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-white mr-3"
+              role="img"
+              aria-label="Time icon"
+            >
               <svg
                 className="w-4 h-4 text-emerald-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
