@@ -108,3 +108,49 @@ doctor-booking/
 - `GET /appointments` - Fetch all appointments
 - `POST /appointments` - Create new appointment
 - `PATCH /doctors/:id` - Update doctor's availability
+
+## 🧪 Testing
+
+The application uses Jest and React Testing Library for unit and integration testing.
+
+### Running Tests
+
+- **Run all tests once**
+
+  ```bash
+  npm test
+  ```
+
+- **Run tests in watch mode** (useful during development)
+  ```bash
+  npm run test:watch
+  ```
+
+### Test Coverage
+
+The test suite includes coverage reporting. After running tests, a coverage report will be generated in the `coverage` directory. The report includes:
+
+- Statement coverage
+- Branch coverage
+- Function coverage
+- Line coverage
+
+You can view the detailed coverage report by opening `coverage/lcov-report/index.html` in your browser.
+
+### Test Structure
+
+Tests are co-located with their corresponding components. For example:
+
+```
+src/
+├── components/
+│   ├── DoctorModal.jsx
+│   └── DoctorModal.test.jsx
+```
+
+Each test file includes:
+
+- Component rendering tests
+- User interaction tests
+- Error handling tests
+- Edge case scenarios
