@@ -35,29 +35,73 @@ const Dropdown = ({
         type="button"
         onClick={() => !disabled && setIsOpen(!isOpen)}
         className={`
-          w-full px-4 py-2 text-left bg-white border border-gray-300 rounded-md shadow-sm
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+          w-full px-4 py-2.5 text-left bg-white border border-gray-200 rounded-xl
+          focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
+          transition-all duration-200
+          ${
+            disabled
+              ? 'opacity-50 cursor-not-allowed bg-gray-50'
+              : 'cursor-pointer hover:border-emerald-300'
+          }
+          ${value ? 'text-gray-900' : 'text-gray-500'}
         `}
         disabled={disabled}
       >
-        {value ? value.label : placeholder}
+        <div className="flex items-center justify-between">
+          <span>{value ? value.label : placeholder}</span>
+          <svg
+            className={`w-5 h-5 text-gray-400 transform transition-transform duration-200 ${
+              isOpen ? 'rotate-180' : ''
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </div>
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-          <ul className="py-1 max-h-60 overflow-auto">
+        <div className="absolute z-10 w-full mt-2 bg-white rounded-xl shadow-lg border border-gray-100 transform origin-top transition-all duration-200">
+          <ul className="py-2 max-h-60 overflow-auto">
             {options.map((option) => (
               <li
                 key={option.value}
                 onClick={() => handleSelect(option)}
                 className={`
-                  px-4 py-2 text-sm text-gray-700 cursor-pointer
-                  hover:bg-gray-100
-                  ${value?.value === option.value ? 'bg-blue-50' : ''}
+                  px-4 py-2.5 text-sm cursor-pointer
+                  transition-colors duration-200
+                  ${
+                    value?.value === option.value
+                      ? 'bg-emerald-50 text-emerald-700 font-medium'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  }
                 `}
               >
-                {option.label}
+                <div className="flex items-center">
+                  {value?.value === option.value && (
+                    <svg
+                      className="w-4 h-4 mr-2 text-emerald-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  )}
+                  {option.label}
+                </div>
               </li>
             ))}
           </ul>
