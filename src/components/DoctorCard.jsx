@@ -82,18 +82,32 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
 
   return (
     <>
-      <div className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+      <div
+        className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+        role="article"
+        aria-labelledby={`doctor-name-${doctor.id}`}
+        aria-describedby={`doctor-specialty-${doctor.id}`}
+      >
         {/* Doctor Image with Title Overlay */}
         <div className="relative h-48 w-full overflow-hidden">
           <img
             src={image}
-            alt={`Dr. ${name}`}
+            alt={`Dr. ${name}'s profile picture`}
             className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            role="img"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent">
             <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
-              <span className="inline-block bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              <h3
+                id={`doctor-name-${doctor.id}`}
+                className="text-2xl font-bold text-white mb-2"
+              >
+                {name}
+              </h3>
+              <span
+                id={`doctor-specialty-${doctor.id}`}
+                className="inline-block bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium"
+              >
                 {specialty.name}
               </span>
             </div>
@@ -103,12 +117,17 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
         {/* Doctor Info */}
         <div className="p-6 space-y-4">
           <div className="space-y-3">
-            <div className="flex items-center text-gray-600">
+            <div
+              className="flex items-center text-gray-600"
+              role="status"
+              aria-label="Next available appointment time"
+            >
               <svg
                 className="w-5 h-5 mr-2 text-emerald-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -122,12 +141,17 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
               </span>
             </div>
 
-            <div className="flex items-center text-gray-600">
+            <div
+              className="flex items-center text-gray-600"
+              role="status"
+              aria-label="Doctor's location"
+            >
               <svg
                 className="w-5 h-5 mr-2 text-emerald-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -149,6 +173,8 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
           <button
             className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
             onClick={() => setIsModalOpen(true)}
+            aria-label={`Book appointment with Dr. ${name}`}
+            tabIndex={0}
           >
             Book Appointment
           </button>

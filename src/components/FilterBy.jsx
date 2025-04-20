@@ -54,11 +54,28 @@ const FilterBy = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold text-emerald-600">Filter by:</h2>
-      <div className="flex flex-col md:flex-row gap-4 p-4 bg-white rounded-lg shadow-sm">
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+    <div
+      className="space-y-4"
+      role="region"
+      aria-label="Filter doctors"
+      aria-describedby="filter-description"
+    >
+      <h2
+        id="filter-description"
+        className="text-2xl font-bold text-emerald-600"
+      >
+        Filter by:
+      </h2>
+      <div
+        className="flex flex-col md:flex-row gap-4 p-4 bg-white rounded-lg shadow-sm"
+        role="group"
+        aria-label="Filter options"
+      >
+        <div className="flex-1" role="group" aria-labelledby="specialty-label">
+          <label
+            id="specialty-label"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Specialty
           </label>
           <Dropdown
@@ -68,10 +85,19 @@ const FilterBy = ({ onFilterChange }) => {
             placeholder={loading ? 'Loading...' : 'Select Specialty'}
             className="w-full"
             disabled={loading}
+            aria-label="Select doctor specialty"
+            aria-describedby="specialty-label"
           />
         </div>
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div
+          className="flex-1"
+          role="group"
+          aria-labelledby="availability-label"
+        >
+          <label
+            id="availability-label"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Availability
           </label>
           <Dropdown
@@ -80,6 +106,8 @@ const FilterBy = ({ onFilterChange }) => {
             onChange={(value) => handleFilterChange('availability', value)}
             placeholder="Select Time"
             className="w-full"
+            aria-label="Select appointment time"
+            aria-describedby="availability-label"
           />
         </div>
       </div>

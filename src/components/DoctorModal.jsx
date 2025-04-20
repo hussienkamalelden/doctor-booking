@@ -44,7 +44,13 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
       <div
         className={`bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden transform transition-all duration-300 ${
           isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
@@ -55,12 +61,18 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNGM0LjQxOCAwIDgtMy41ODIgOC04cy0zLjU4Mi04LTgtOC04IDMuNTgyLTggOCAzLjU4MiA4IDggOHoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-10"></div>
           <div className="flex justify-between items-start relative z-10">
             <div>
-              <h2 className="text-2xl font-bold text-white">{doctor.name}</h2>
-              <p className="text-emerald-100 mt-1">{doctor.specialty.name}</p>
+              <h2 id="modal-title" className="text-2xl font-bold text-white">
+                {doctor.name}
+              </h2>
+              <p id="modal-description" className="text-emerald-100 mt-1">
+                {doctor.specialty.name}
+              </p>
             </div>
             <button
               onClick={onClose}
               className="text-white/80 hover:text-white transition-colors duration-200 hover:scale-110 transform"
+              aria-label="Close modal"
+              tabIndex={0}
             >
               <svg
                 className="w-6 h-6"
@@ -85,7 +97,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
             <div className="relative h-64 rounded-xl overflow-hidden group">
               <img
                 src={doctor.image}
-                alt={doctor.name}
+                alt={`${doctor.name}'s profile picture`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -128,6 +140,9 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
                   className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 appearance-none bg-white"
                   required
                   disabled={isSubmitting}
+                  aria-label="Select appointment time slot"
+                  aria-describedby="timeSlot-description"
+                  tabIndex={0}
                 >
                   <option value="">Select a time slot</option>
                   {doctor.slots.map((slot) => (
@@ -205,6 +220,11 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
                     ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md hover:shadow-lg'
                     : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                 }`}
+                aria-label={
+                  isSubmitting ? 'Booking appointment' : 'Book appointment'
+                }
+                aria-disabled={!selectedSlot || isSubmitting}
+                tabIndex={0}
               >
                 {isSubmitting ? (
                   <div className="flex items-center">
