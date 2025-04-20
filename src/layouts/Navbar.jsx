@@ -14,7 +14,7 @@ const Navbar = () => {
           <div className="flex space-x-6">
             <Link
               to="/appointments"
-              className="text-gray-600 hover:text-emerald-600 transition-colors duration-200 font-medium"
+              className="text-gray-600 hover:text-emerald-600 transition-colors duration-200 font-semibold"
             >
               Appointments
             </Link>
