@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setModalState,
@@ -11,7 +11,7 @@ import {
 } from '../store/appointmentSlice';
 import { updateDoctorSlots } from '../store/doctorSlice';
 
-const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
+const DoctorModal = React.memo(({ doctor, isOpen, onBookAppointment }) => {
   const dispatch = useDispatch();
   const { selectedSlot, isSubmitting, bookingStatus, errorMessage, isVisible } =
     useSelector((state) => state.appointments.modalState);
@@ -24,32 +24,46 @@ const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
     }
   }, [isOpen, dispatch]);
 
-  if (!isOpen) return null;
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (selectedSlot) {
-      dispatch(setSubmitting(true));
-      dispatch(setErrorMessage(''));
-      dispatch(setBookingStatus(null));
-      try {
-        await onBookAppointment(selectedSlot);
-        dispatch(setBookingStatus('success'));
-        setTimeout(() => {
-          dispatch(resetModalState());
-        }, 1000);
-      } catch (error) {
-        dispatch(setBookingStatus('error'));
-        dispatch(
-          setErrorMessage(
-            error.message || 'Failed to book appointment. Please try again.'
-          )
-        );
-      } finally {
-        dispatch(setSubmitting(false));
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (selectedSlot) {
+        dispatch(setSubmitting(true));
+        dispatch(setErrorMessage(''));
+        dispatch(setBookingStatus(null));
+        try {
+          await onBookAppointment(selectedSlot);
+          dispatch(setBookingStatus('success'));
+          setTimeout(() => {
+            dispatch(resetModalState());
+          }, 1000);
+        } catch (error) {
+          dispatch(setBookingStatus('error'));
+          dispatch(
+            setErrorMessage(
+              error.message || 'Failed to book appointment. Please try again.'
+            )
+          );
+        } finally {
+          dispatch(setSubmitting(false));
+        }
       }
-    }
-  };
+    },
+    [selectedSlot, onBookAppointment, dispatch]
+  );
+
+  const handleSlotChange = useCallback(
+    (e) => {
+      dispatch(setSelectedSlot(e.target.value));
+    },
+    [dispatch]
+  );
+
+  const handleClose = useCallback(() => {
+    dispatch(resetModalState());
+  }, [dispatch]);
+
+  if (!isOpen) return null;
 
   return (
     <div
@@ -77,7 +91,7 @@ const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
               </p>
             </div>
             <button
-              onClick={() => dispatch(resetModalState())}
+              onClick={handleClose}
               className="text-white/80 hover:text-white transition-colors duration-200 hover:scale-110 transform"
               aria-label="Close modal"
               tabIndex={0}
@@ -140,7 +154,7 @@ const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
                 <select
                   id="timeSlot"
                   value={selectedSlot}
-                  onChange={(e) => dispatch(setSelectedSlot(e.target.value))}
+                  onChange={handleSlotChange}
                   className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 appearance-none bg-white"
                   required
                   disabled={isSubmitting}
@@ -263,6 +277,8 @@ const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
       </div>
     </div>
   );
-};
+});
+
+DoctorModal.displayName = 'DoctorModal';
 
 export default DoctorModal;

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DoctorModal from './DoctorModal';
 import { setModalState } from '../store/appointmentSlice';
 import { updateDoctorSlots } from '../store/doctorSlice';
 
-const DoctorCard = ({ doctor }) => {
+const DoctorCard = React.memo(({ doctor }) => {
   const { name, specialty, location, image, slots } = doctor;
   const dispatch = useDispatch();
   const { modalState } = useSelector((state) => state.appointments);
@@ -14,67 +14,74 @@ const DoctorCard = ({ doctor }) => {
   // Get the first available slot as the next availability
   const nextAvailability = slots.length > 0 ? slots[0] : 'No slots available';
 
-  const handleBookAppointment = async (selectedSlot) => {
-    try {
-      // 1. Check for existing appointments at the same time
-      const appointmentsResponse = await fetch(
-        'http://localhost:3001/appointments'
-      );
-      const appointments = await appointmentsResponse.json();
-
-      const hasExistingAppointment = appointments.some(
-        (appointment) => appointment.slot === selectedSlot
-      );
-
-      if (hasExistingAppointment) {
-        throw new Error(
-          'You already have an appointment scheduled at this time. Please choose a different time slot.'
+  const handleBookAppointment = useCallback(
+    async (selectedSlot) => {
+      try {
+        // 1. Check for existing appointments at the same time
+        const appointmentsResponse = await fetch(
+          'http://localhost:3001/appointments'
         );
-      }
+        const appointments = await appointmentsResponse.json();
 
-      // 2. Create the appointment
-      const appointmentData = {
-        id: `a${Date.now()}`, // Generate a unique ID
-        name: doctor.name,
-        specialty: doctor.specialty,
-        location: doctor.location,
-        slot: selectedSlot,
-      };
+        const hasExistingAppointment = appointments.some(
+          (appointment) => appointment.slot === selectedSlot
+        );
 
-      const appointmentResponse = await fetch(
-        'http://localhost:3001/appointments',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(appointmentData),
+        if (hasExistingAppointment) {
+          throw new Error(
+            'You already have an appointment scheduled at this time. Please choose a different time slot.'
+          );
         }
-      );
 
-      if (!appointmentResponse.ok) {
-        throw new Error('Failed to book appointment');
+        // 2. Create the appointment
+        const appointmentData = {
+          id: `a${Date.now()}`, // Generate a unique ID
+          name: doctor.name,
+          specialty: doctor.specialty,
+          location: doctor.location,
+          slot: selectedSlot,
+        };
+
+        const appointmentResponse = await fetch(
+          'http://localhost:3001/appointments',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(appointmentData),
+          }
+        );
+
+        if (!appointmentResponse.ok) {
+          throw new Error('Failed to book appointment');
+        }
+
+        // 3. Update the doctor's slots using Redux Thunk
+        const updatedSlots = doctor.slots.filter(
+          (slot) => slot !== selectedSlot
+        );
+        await dispatch(
+          updateDoctorSlots({ doctorId: doctor.id, updatedSlots })
+        );
+
+        // Close the modal
+        dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
+      } catch (error) {
+        console.error('Error in booking process:', error);
+        throw error;
       }
+    },
+    [doctor, dispatch]
+  );
 
-      // 3. Update the doctor's slots using Redux Thunk
-      const updatedSlots = doctor.slots.filter((slot) => slot !== selectedSlot);
-      await dispatch(updateDoctorSlots({ doctorId: doctor.id, updatedSlots }));
-
-      // Close the modal
-      dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
-    } catch (error) {
-      console.error('Error in booking process:', error);
-      throw error;
-    }
-  };
-
-  const handleOpenModal = () => {
+  const handleOpenModal = useCallback(() => {
     dispatch(setModalState({ isOpen: true, selectedDoctor: doctor }));
-  };
+  }, [doctor, dispatch]);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
-  };
+  }, [dispatch]);
 
   return (
     <>
@@ -185,6 +192,8 @@ const DoctorCard = ({ doctor }) => {
       />
     </>
   );
-};
+});
+
+DoctorCard.displayName = 'DoctorCard';
 
 export default DoctorCard;

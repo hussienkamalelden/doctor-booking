@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FilterBy from '../components/FilterBy';
 import DoctorCard from '../components/DoctorCard';
@@ -19,22 +19,31 @@ const Home = () => {
     dispatch(fetchDoctors());
   }, [dispatch]);
 
-  const handleFilterChange = (filters) => {
-    dispatch(filterDoctors(filters));
-  };
-
-  // Calculate pagination
-  const indexOfLastDoctor = currentPage * doctorsPerPage;
-  const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
-  const currentDoctors = filteredDoctors.slice(
-    indexOfFirstDoctor,
-    indexOfLastDoctor
+  const handleFilterChange = useCallback(
+    (filters) => {
+      dispatch(filterDoctors(filters));
+    },
+    [dispatch]
   );
-  const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
-  const handlePageChange = (pageNumber) => {
-    dispatch(setCurrentPage(pageNumber));
-  };
+  const handlePageChange = useCallback(
+    (pageNumber) => {
+      dispatch(setCurrentPage(pageNumber));
+    },
+    [dispatch]
+  );
+
+  // Memoize pagination calculations
+  const { currentDoctors, totalPages } = useMemo(() => {
+    const indexOfLastDoctor = currentPage * doctorsPerPage;
+    const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+    const currentDoctors = filteredDoctors.slice(
+      indexOfFirstDoctor,
+      indexOfLastDoctor
+    );
+    const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
+    return { currentDoctors, totalPages };
+  }, [currentPage, doctorsPerPage, filteredDoctors]);
 
   return (
     <div className="py-12">
@@ -85,4 +94,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);
