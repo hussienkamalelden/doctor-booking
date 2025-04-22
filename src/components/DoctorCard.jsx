@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DoctorModal from './DoctorModal';
 import { setModalState } from '../store/appointmentSlice';
-import { setDoctors } from '../store/doctorSlice';
+import { updateDoctorSlots } from '../store/doctorSlice';
 
 const DoctorCard = ({ doctor }) => {
   const { name, specialty, location, image, slots } = doctor;
@@ -56,31 +56,9 @@ const DoctorCard = ({ doctor }) => {
         throw new Error('Failed to book appointment');
       }
 
-      // 3. Update the doctor's slots
+      // 3. Update the doctor's slots using Redux Thunk
       const updatedSlots = doctor.slots.filter((slot) => slot !== selectedSlot);
-      const doctorUpdateResponse = await fetch(
-        `http://localhost:3001/doctors/${doctor.id}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            slots: updatedSlots,
-          }),
-        }
-      );
-
-      if (!doctorUpdateResponse.ok) {
-        throw new Error('Failed to update doctor slots');
-      }
-
-      // 4. Refresh the doctors list
-      const updatedDoctorsResponse = await fetch(
-        'http://localhost:3001/doctors'
-      );
-      const updatedDoctors = await updatedDoctorsResponse.json();
-      dispatch(setDoctors(updatedDoctors));
+      await dispatch(updateDoctorSlots({ doctorId: doctor.id, updatedSlots }));
 
       // Close the modal
       dispatch(setModalState({ isOpen: false, selectedDoctor: null }));

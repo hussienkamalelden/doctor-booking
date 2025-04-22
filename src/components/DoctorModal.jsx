@@ -9,7 +9,7 @@ import {
   setModalVisibility,
   resetModalState,
 } from '../store/appointmentSlice';
-import { setDoctors } from '../store/doctorSlice';
+import { updateDoctorSlots } from '../store/doctorSlice';
 
 const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
   const dispatch = useDispatch();

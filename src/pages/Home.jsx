@@ -5,8 +5,7 @@ import DoctorCard from '../components/DoctorCard';
 import Intro from '../components/Intro';
 import Pagination from '../components/Pagination';
 import {
-  setDoctors,
-  setLoading,
+  fetchDoctors,
   setCurrentPage,
   filterDoctors,
 } from '../store/doctorSlice';
@@ -16,22 +15,9 @@ const Home = () => {
   const { doctors, loading, filteredDoctors, currentPage, doctorsPerPage } =
     useSelector((state) => state.doctors);
 
-  const fetchDoctors = async () => {
-    try {
-      dispatch(setLoading(true));
-      const response = await fetch('http://localhost:3001/doctors');
-      const data = await response.json();
-      dispatch(setDoctors(data));
-      dispatch(setLoading(false));
-    } catch (error) {
-      console.error('Error fetching doctors:', error);
-      dispatch(setLoading(false));
-    }
-  };
-
   useEffect(() => {
-    fetchDoctors();
-  }, []);
+    dispatch(fetchDoctors());
+  }, [dispatch]);
 
   const handleFilterChange = (filters) => {
     dispatch(filterDoctors(filters));
@@ -83,11 +69,7 @@ const Home = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentDoctors.map((doctor) => (
-                  <DoctorCard
-                    key={doctor.id}
-                    doctor={doctor}
-                    onDoctorUpdate={fetchDoctors}
-                  />
+                  <DoctorCard key={doctor.id} doctor={doctor} />
                 ))}
               </div>
               <Pagination
