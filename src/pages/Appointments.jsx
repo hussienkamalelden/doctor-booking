@@ -1,29 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AppointmentCard from '../components/AppointmentCard';
+import {
+  setAppointments,
+  setLoading,
+  setError,
+} from '../store/appointmentSlice';
 
 const Appointments = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { appointments, loading, error } = useSelector(
+    (state) => state.appointments
+  );
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
+        dispatch(setLoading(true));
         const response = await fetch('http://localhost:3001/appointments');
         if (!response.ok) {
           throw new Error('Failed to fetch appointments');
         }
         const data = await response.json();
-        setAppointments(data);
-        setLoading(false);
+        dispatch(setAppointments(data));
+        dispatch(setLoading(false));
       } catch (error) {
-        setError(error.message);
-        setLoading(false);
+        dispatch(setError(error.message));
+        dispatch(setLoading(false));
       }
     };
 
     fetchAppointments();
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (

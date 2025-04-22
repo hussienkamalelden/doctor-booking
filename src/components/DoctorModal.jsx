@@ -1,48 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setModalState } from '../store/appointmentSlice';
+import {
+  setModalState,
+  setSelectedSlot,
+  setSubmitting,
+  setBookingStatus,
+  setErrorMessage,
+  setModalVisibility,
+  resetModalState,
+} from '../store/appointmentSlice';
 import { setDoctors } from '../store/doctorSlice';
 
-const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
-  const [selectedSlot, setSelectedSlot] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [bookingStatus, setBookingStatus] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
+const DoctorModal = ({ doctor, isOpen, onBookAppointment }) => {
   const dispatch = useDispatch();
+  const { selectedSlot, isSubmitting, bookingStatus, errorMessage, isVisible } =
+    useSelector((state) => state.appointments.modalState);
 
   useEffect(() => {
     if (isOpen) {
-      // Trigger animation when modal opens
-      setIsVisible(true);
+      dispatch(setModalVisibility(true));
     } else {
-      setIsVisible(false);
+      dispatch(setModalVisibility(false));
     }
-  }, [isOpen]);
+  }, [isOpen, dispatch]);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (selectedSlot) {
-      setIsSubmitting(true);
-      setErrorMessage('');
-      setBookingStatus(null);
+      dispatch(setSubmitting(true));
+      dispatch(setErrorMessage(''));
+      dispatch(setBookingStatus(null));
       try {
         await onBookAppointment(selectedSlot);
-        setBookingStatus('success');
+        dispatch(setBookingStatus('success'));
         setTimeout(() => {
-          dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
-          setBookingStatus(null);
-          setSelectedSlot('');
+          dispatch(resetModalState());
         }, 1000);
       } catch (error) {
-        setBookingStatus('error');
-        setErrorMessage(
-          error.message || 'Failed to book appointment. Please try again.'
+        dispatch(setBookingStatus('error'));
+        dispatch(
+          setErrorMessage(
+            error.message || 'Failed to book appointment. Please try again.'
+          )
         );
       } finally {
-        setIsSubmitting(false);
+        dispatch(setSubmitting(false));
       }
     }
   };
@@ -73,9 +77,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
               </p>
             </div>
             <button
-              onClick={() =>
-                dispatch(setModalState({ isOpen: false, selectedDoctor: null }))
-              }
+              onClick={() => dispatch(resetModalState())}
               className="text-white/80 hover:text-white transition-colors duration-200 hover:scale-110 transform"
               aria-label="Close modal"
               tabIndex={0}
@@ -138,11 +140,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
                 <select
                   id="timeSlot"
                   value={selectedSlot}
-                  onChange={(e) => {
-                    setSelectedSlot(e.target.value);
-                    setErrorMessage('');
-                    setBookingStatus(null);
-                  }}
+                  onChange={(e) => dispatch(setSelectedSlot(e.target.value))}
                   className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 appearance-none bg-white"
                   required
                   disabled={isSubmitting}

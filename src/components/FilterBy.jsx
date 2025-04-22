@@ -1,56 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from './Dropdown';
+import { setSpecialties, setLoading, updateFilter } from '../store/filterSlice';
 
 const FilterBy = ({ onFilterChange }) => {
-  const [filters, setFilters] = useState({
-    specialty: null,
-    availability: null,
-  });
-
-  const [specialties, setSpecialties] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { filters, specialties, loading, availabilities } = useSelector(
+    (state) => state.filters
+  );
 
   useEffect(() => {
     const fetchSpecialties = async () => {
       try {
         const response = await fetch('http://localhost:3001/specialties');
         const data = await response.json();
-        setSpecialties(
-          data.map((specialty) => ({
-            value: specialty.id,
-            label: specialty.name,
-          }))
+        dispatch(
+          setSpecialties(
+            data.map((specialty) => ({
+              value: specialty.id,
+              label: specialty.name,
+            }))
+          )
         );
-        setLoading(false);
+        dispatch(setLoading(false));
       } catch (error) {
         console.error('Error fetching specialties:', error);
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
     fetchSpecialties();
-  }, []);
-
-  const availabilities = [
-    { value: '2:00 PM', label: '2:00 PM' },
-    { value: '3:00 PM', label: '3:00 PM' },
-    { value: '4:00 PM', label: '4:00 PM' },
-    { value: '5:00 PM', label: '5:00 PM' },
-    { value: '6:00 PM', label: '6:00 PM' },
-    { value: '7:00 PM', label: '7:00 PM' },
-    { value: '8:00 PM', label: '8:00 PM' },
-    { value: '9:00 PM', label: '9:00 PM' },
-    { value: '10:00 PM', label: '10:00 PM' },
-    { value: '11:00 PM', label: '11:00 PM' },
-  ];
+  }, [dispatch]);
 
   const handleFilterChange = (type, value) => {
-    const newFilters = {
-      ...filters,
-      [type]: value,
-    };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
+    dispatch(updateFilter({ type, value }));
+    onFilterChange({ ...filters, [type]: value });
   };
 
   return (
