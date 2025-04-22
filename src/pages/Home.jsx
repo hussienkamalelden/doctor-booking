@@ -1,62 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FilterBy from '../components/FilterBy';
 import DoctorCard from '../components/DoctorCard';
 import Intro from '../components/Intro';
 import Pagination from '../components/Pagination';
+import {
+  fetchDoctors,
+  setCurrentPage,
+  filterDoctors,
+} from '../store/doctorSlice';
 
 const Home = () => {
-  const [doctors, setDoctors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filteredDoctors, setFilteredDoctors] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const doctorsPerPage = 6;
-
-  const fetchDoctors = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/doctors');
-      const data = await response.json();
-      setDoctors(data);
-      setFilteredDoctors(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching doctors:', error);
-      setLoading(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const { doctors, loading, filteredDoctors, currentPage, doctorsPerPage } =
+    useSelector((state) => state.doctors);
 
   useEffect(() => {
-    fetchDoctors();
-  }, []);
+    dispatch(fetchDoctors());
+  }, [dispatch]);
 
-  const handleFilterChange = (filters) => {
-    let filtered = [...doctors];
-
-    if (filters.specialty) {
-      filtered = filtered.filter(
-        (doctor) => doctor.specialty.id === filters.specialty.value
-      );
-    }
-
-    if (filters.availability) {
-      filtered = filtered.filter((doctor) =>
-        doctor.slots.includes(filters.availability.value)
-      );
-    }
-
-    setFilteredDoctors(filtered);
-    setCurrentPage(1); // Reset to first page when filters change
-  };
-
-  // Calculate pagination
-  const indexOfLastDoctor = currentPage * doctorsPerPage;
-  const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
-  const currentDoctors = filteredDoctors.slice(
-    indexOfFirstDoctor,
-    indexOfLastDoctor
+  const handleFilterChange = useCallback(
+    (filters) => {
+      dispatch(filterDoctors(filters));
+    },
+    [dispatch]
   );
-  const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
-  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePageChange = useCallback(
+    (pageNumber) => {
+      dispatch(setCurrentPage(pageNumber));
+    },
+    [dispatch]
+  );
+
+  // Memoize pagination calculations
+  const { currentDoctors, totalPages } = useMemo(() => {
+    const indexOfLastDoctor = currentPage * doctorsPerPage;
+    const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+    const currentDoctors = filteredDoctors.slice(
+      indexOfFirstDoctor,
+      indexOfLastDoctor
+    );
+    const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
+    return { currentDoctors, totalPages };
+  }, [currentPage, doctorsPerPage, filteredDoctors]);
 
   return (
     <div className="py-12">
@@ -91,22 +78,14 @@ const Home = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentDoctors.map((doctor) => (
-                  <DoctorCard
-                    key={doctor.id}
-                    doctor={doctor}
-                    onDoctorUpdate={fetchDoctors}
-                  />
+                  <DoctorCard key={doctor.id} doctor={doctor} />
                 ))}
               </div>
-
-              {/* Pagination Controls */}
-              {totalPages > 1 && (
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                />
-              )}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </>
           )}
         </section>
@@ -115,4 +94,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);
