@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DoctorModal from './DoctorModal';
+import { setModalState } from '../store/appointmentSlice';
+import { setDoctors } from '../store/doctorSlice';
 
-const DoctorCard = ({ doctor, onDoctorUpdate }) => {
+const DoctorCard = ({ doctor }) => {
   const { name, specialty, location, image, slots } = doctor;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { modalState } = useSelector((state) => state.appointments);
+  const isModalOpen =
+    modalState.isOpen && modalState.selectedDoctor?.id === doctor.id;
 
   // Get the first available slot as the next availability
   const nextAvailability = slots.length > 0 ? slots[0] : 'No slots available';
 
-  const handleBookAppointment = async (doctor, selectedSlot) => {
+  const handleBookAppointment = async (selectedSlot) => {
     try {
       // 1. Check for existing appointments at the same time
       const appointmentsResponse = await fetch(
@@ -70,14 +76,26 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
       }
 
       // 4. Refresh the doctors list
-      await onDoctorUpdate();
+      const updatedDoctorsResponse = await fetch(
+        'http://localhost:3001/doctors'
+      );
+      const updatedDoctors = await updatedDoctorsResponse.json();
+      dispatch(setDoctors(updatedDoctors));
 
-      // Show success message or handle the response
-      console.log('Appointment booked successfully and doctor slots updated');
+      // Close the modal
+      dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
     } catch (error) {
       console.error('Error in booking process:', error);
-      throw error; // Re-throw to handle in the modal
+      throw error;
     }
+  };
+
+  const handleOpenModal = () => {
+    dispatch(setModalState({ isOpen: true, selectedDoctor: doctor }));
+  };
+
+  const handleCloseModal = () => {
+    dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
   };
 
   return (
@@ -172,7 +190,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
 
           <button
             className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleOpenModal}
             aria-label={`Book appointment with Dr. ${name}`}
             tabIndex={0}
           >
@@ -184,7 +202,7 @@ const DoctorCard = ({ doctor, onDoctorUpdate }) => {
       <DoctorModal
         doctor={doctor}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleCloseModal}
         onBookAppointment={handleBookAppointment}
       />
     </>

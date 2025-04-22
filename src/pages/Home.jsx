@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FilterBy from '../components/FilterBy';
 import DoctorCard from '../components/DoctorCard';
 import Intro from '../components/Intro';
 import Pagination from '../components/Pagination';
+import {
+  setDoctors,
+  setLoading,
+  setCurrentPage,
+  filterDoctors,
+} from '../store/doctorSlice';
 
 const Home = () => {
-  const [doctors, setDoctors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filteredDoctors, setFilteredDoctors] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const doctorsPerPage = 6;
+  const dispatch = useDispatch();
+  const { doctors, loading, filteredDoctors, currentPage, doctorsPerPage } =
+    useSelector((state) => state.doctors);
 
   const fetchDoctors = async () => {
     try {
+      dispatch(setLoading(true));
       const response = await fetch('http://localhost:3001/doctors');
       const data = await response.json();
-      setDoctors(data);
-      setFilteredDoctors(data);
-      setLoading(false);
+      dispatch(setDoctors(data));
+      dispatch(setLoading(false));
     } catch (error) {
       console.error('Error fetching doctors:', error);
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
@@ -29,22 +34,7 @@ const Home = () => {
   }, []);
 
   const handleFilterChange = (filters) => {
-    let filtered = [...doctors];
-
-    if (filters.specialty) {
-      filtered = filtered.filter(
-        (doctor) => doctor.specialty.id === filters.specialty.value
-      );
-    }
-
-    if (filters.availability) {
-      filtered = filtered.filter((doctor) =>
-        doctor.slots.includes(filters.availability.value)
-      );
-    }
-
-    setFilteredDoctors(filtered);
-    setCurrentPage(1); // Reset to first page when filters change
+    dispatch(filterDoctors(filters));
   };
 
   // Calculate pagination
@@ -56,7 +46,9 @@ const Home = () => {
   );
   const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
-  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePageChange = (pageNumber) => {
+    dispatch(setCurrentPage(pageNumber));
+  };
 
   return (
     <div className="py-12">
@@ -98,15 +90,11 @@ const Home = () => {
                   />
                 ))}
               </div>
-
-              {/* Pagination Controls */}
-              {totalPages > 1 && (
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                />
-              )}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </>
           )}
         </section>

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setModalState } from '../store/appointmentSlice';
+import { setDoctors } from '../store/doctorSlice';
 
 const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
   const [selectedSlot, setSelectedSlot] = useState('');
@@ -6,6 +9,7 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
   const [bookingStatus, setBookingStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isOpen) {
@@ -25,10 +29,10 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
       setErrorMessage('');
       setBookingStatus(null);
       try {
-        await onBookAppointment(doctor, selectedSlot);
+        await onBookAppointment(selectedSlot);
         setBookingStatus('success');
         setTimeout(() => {
-          onClose();
+          dispatch(setModalState({ isOpen: false, selectedDoctor: null }));
           setBookingStatus(null);
           setSelectedSlot('');
         }, 1000);
@@ -69,7 +73,9 @@ const DoctorModal = ({ doctor, isOpen, onClose, onBookAppointment }) => {
               </p>
             </div>
             <button
-              onClick={onClose}
+              onClick={() =>
+                dispatch(setModalState({ isOpen: false, selectedDoctor: null }))
+              }
               className="text-white/80 hover:text-white transition-colors duration-200 hover:scale-110 transform"
               aria-label="Close modal"
               tabIndex={0}
